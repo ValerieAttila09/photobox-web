@@ -9,6 +9,7 @@ interface FilterControlsProps {
   currentFilter: PhotoFilter;
   onThemeChange: (theme: FrameTheme) => void;
   onFilterChange: (filter: PhotoFilter) => void;
+  onAddSticker: (emoji: string) => void;
 }
 
 const THEMES: { id: FrameTheme; label: string; colorBg: string }[] = [
@@ -33,7 +34,9 @@ export function FilterControls({
   currentFilter,
   onThemeChange,
   onFilterChange,
+  onAddSticker,
 }: FilterControlsProps) {
+  const stickers = ['✨', '💖', '⭐', '🌈', '📸', '🦋'];
   return (
     <div className="photobox-panel flex flex-col gap-6 w-full max-w-md bg-white p-6">
       {/* Pilihan Warna Frame */}
@@ -54,6 +57,28 @@ export function FilterControls({
               }`}
               title={t.label}
             />
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div className="flex items-center gap-2 mb-3 text-sm font-black uppercase tracking-wide text-[var(--pb-ink)]">
+          <Sparkles className="w-4 h-4 text-[var(--pb-coral)]" />
+          <span>Drag & drop sticker</span>
+        </div>
+        <div className="grid grid-cols-6 gap-2">
+          {stickers.map((emoji) => (
+            <button
+              key={emoji}
+              type="button"
+              draggable
+              onDragStart={(event) => event.dataTransfer.setData('text/plain', emoji)}
+              onClick={() => onAddSticker(emoji)}
+              className="flex aspect-square items-center justify-center rounded-lg border-2 border-gray-300 bg-gray-50 text-xl transition-transform hover:-translate-y-1 hover:bg-[var(--pb-lime)]"
+              title={`Tambah ${emoji}`}
+            >
+              {emoji}
+            </button>
           ))}
         </div>
       </div>

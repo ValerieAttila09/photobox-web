@@ -6,7 +6,8 @@ import { CountdownOverlay } from '@/components/CountdownOverlay';
 import { PhotoboxCanvas } from '@/components/PhotoboxCanvas';
 import { FilterControls } from '@/components/FilterControls';
 import { captureVideoFrame, downloadCanvasImage } from '@/utils/canvasHelpers';
-import { AppStage, FrameTheme, PhotoFilter } from '@/types/photobox';
+import { AppStage, FrameTheme, PhotoFilter, PhotoboxSticker } from '@/types/photobox';
+import type { Stage as KonvaStage } from 'konva/lib/Stage';
 import confetti from 'canvas-confetti';
 import { Camera, Download, RefreshCw, Sparkles } from 'lucide-react';
 import { useMediaPipe } from '@/hooks/useMediaPipe';
@@ -20,8 +21,9 @@ export default function PhotoboxApp() {
   // Customization State
   const [theme, setTheme] = useState<FrameTheme>('classic-white');
   const [filter, setFilter] = useState<PhotoFilter>('none');
+  const [stickers, setStickers] = useState<PhotoboxSticker[]>([]);
 
-  const stageRef = useRef<any>(null);
+  const stageRef = useRef<KonvaStage | null>(null);
   const isProcessingGesture = useRef(false);
 
   // Handler Memotret Foto
@@ -101,7 +103,24 @@ export default function PhotoboxApp() {
   // Reset Foto / Foto Ulang
   const handleReset = () => {
     setPhotos([]);
+    setStickers([]);
     handleStartSession();
+  };
+
+  const addSticker = (emoji: string, x = 156, y = 560) => {
+    setStickers((current) => [...current, {
+      id: `${emoji}-${Date.now()}`,
+      emoji,
+      x,
+      y,
+      scale: 1,
+    }]);
+  };
+
+  const moveSticker = (id: string, x: number, y: number) => {
+    setStickers((current) => current.map((sticker) => (
+      sticker.id === id ? { ...sticker, x, y } : sticker
+    )));
   };
 
   return (
@@ -173,6 +192,9 @@ export default function PhotoboxApp() {
               photos={photos}
               theme={theme}
               filter={filter}
+              stickers={stickers}
+              onAddSticker={addSticker}
+              onStickerChange={moveSticker}
               onStageReady={(ref) => (stageRef.current = ref)}
             />
 
@@ -183,6 +205,7 @@ export default function PhotoboxApp() {
                 currentFilter={filter}
                 onThemeChange={setTheme}
                 onFilterChange={setFilter}
+                onAddSticker={addSticker}
               />
 
               {/* Tombol Aksi Download & Reset */}

@@ -130,6 +130,7 @@
 }
 
 :root {
+  --font-sans: "Trebuchet MS", "Arial Rounded MT Bold", sans-serif;
   --pb-ink: #17151b;
   --pb-lilac: #9d8be8;
   --pb-lime: #b8ff43;
