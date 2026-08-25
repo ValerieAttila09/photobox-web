@@ -35,11 +35,11 @@ export function FilterControls({
   onFilterChange,
 }: FilterControlsProps) {
   return (
-    <div className="flex flex-col gap-6 w-full max-w-md bg-gray-900/80 p-6 rounded-2xl border border-gray-800 backdrop-blur-md">
+    <div className="photobox-panel flex flex-col gap-6 w-full max-w-md bg-white p-6">
       {/* Pilihan Warna Frame */}
       <div>
-        <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-200">
-          <Palette className="w-4 h-4 text-indigo-400" />
+        <div className="flex items-center gap-2 mb-3 text-sm font-black uppercase tracking-wide text-[var(--pb-ink)]">
+          <Palette className="w-4 h-4 text-[var(--pb-coral)]" />
           <span>Pilih Warna Bingkai</span>
         </div>
         <div className="grid grid-cols-5 gap-2">
@@ -49,8 +49,8 @@ export function FilterControls({
               onClick={() => onThemeChange(t.id)}
               className={`h-10 rounded-xl border-2 transition-all flex items-center justify-center ${t.colorBg} ${
                 currentTheme === t.id
-                  ? 'border-indigo-500 scale-105 shadow-lg ring-2 ring-indigo-500/50'
-                  : 'border-transparent hover:scale-95 opacity-80'
+                  ? 'border-[var(--pb-ink)] scale-105 shadow-[3px_3px_0_var(--pb-ink)] ring-2 ring-[var(--pb-pink)]'
+                  : 'border-gray-300 hover:scale-95 opacity-80'
               }`}
               title={t.label}
             />
@@ -60,8 +60,8 @@ export function FilterControls({
 
       {/* Pilihan Filter Foto */}
       <div>
-        <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-200">
-          <Sparkles className="w-4 h-4 text-indigo-400" />
+        <div className="flex items-center gap-2 mb-3 text-sm font-black uppercase tracking-wide text-[var(--pb-ink)]">
+          <Sparkles className="w-4 h-4 text-[var(--pb-coral)]" />
           <span>Efek Filter Foto</span>
         </div>
         <div className="grid grid-cols-3 gap-2">
@@ -71,8 +71,8 @@ export function FilterControls({
               onClick={() => onFilterChange(f.id)}
               className={`px-3 py-2 rounded-xl text-xs font-medium transition-all border ${
                 currentFilter === f.id
-                  ? 'bg-indigo-600 text-white border-indigo-500 shadow-md'
-                  : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700'
+                  ? 'bg-[var(--pb-pink)] text-[var(--pb-ink)] border-[var(--pb-ink)] shadow-[3px_3px_0_var(--pb-ink)]'
+                  : 'bg-gray-100 text-gray-600 border-gray-300 hover:bg-[var(--pb-lime)]'
               }`}
             >
               {f.label}

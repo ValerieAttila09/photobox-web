@@ -105,37 +105,43 @@ export default function PhotoboxApp() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-between p-4 md:p-8">
+    <main className="photobox-shell min-h-screen text-[var(--pb-ink)] flex flex-col items-center justify-between overflow-hidden px-4 py-5 md:px-8 md:py-7">
       {/* Header Branding */}
-      <header className="flex flex-col items-center gap-2 mb-6">
-        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-medium">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>MediaPipe AI Photobox</span>
+      <header className="flex w-full max-w-6xl items-center justify-between gap-4 mb-8">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-[var(--pb-ink)] bg-[var(--pb-lime)] shadow-[4px_4px_0_var(--pb-ink)]">
+            <Camera className="h-5 w-5" />
+          </div>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.22em]">Fujifilm inspired</p>
+            <p className="text-sm font-bold">Photobox Studio</p>
+          </div>
         </div>
-        <h1 className="text-3xl md:text-5xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-          SnapBox AI
-        </h1>
+        <div className="hidden items-center gap-2 rounded-full border-2 border-[var(--pb-ink)] bg-white px-4 py-2 text-xs font-black uppercase sm:flex">
+          <Sparkles className="h-3.5 w-3.5 text-[var(--pb-coral)]" /> AI photo booth
+        </div>
       </header>
 
       {/* Area Konten Utama */}
       <div className="flex-1 w-full max-w-5xl flex flex-col items-center justify-center">
         {/* STAGE 1: Halaman Awal (START) */}
         {stage === 'START' && (
-          <div className="flex flex-col items-center text-center max-w-md gap-6 bg-slate-900/50 p-8 rounded-3xl border border-slate-800">
-            <div className="w-20 h-20 rounded-2xl bg-indigo-600/20 flex items-center justify-center text-indigo-400 border border-indigo-500/30">
+          <div className="photobox-panel flex flex-col items-center text-center max-w-lg gap-6 bg-white p-8 md:p-12">
+              <div className="photobox-stripe flex h-24 w-24 items-center justify-center rounded-2xl border-3 border-[var(--pb-ink)] text-white shadow-[5px_5px_0_var(--pb-ink)]">
               <Camera className="w-10 h-10" />
             </div>
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold">Siap untuk Berfoto?</h2>
-              <p className="text-sm text-slate-400">
-                Cukup tunjukkan gestur <span className="text-indigo-400 font-semibold">Mantap (Thumbs Up) 👍</span> ke kamera untuk memulai pemotretan otomatis 3x.
+                <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--pb-pink)]">Welcome to the studio</p>
+                <h1 className="text-4xl font-black tracking-tight md:text-6xl">SnapBox <span className="text-[#6257d9]">AI</span></h1>
+                <p className="text-sm font-medium text-gray-600">
+                  Tunjukkan gestur <span className="font-black text-[var(--pb-coral)]">Thumbs Up</span> untuk memulai sesi foto otomatis 3x.
               </p>
             </div>
             <button
               onClick={handleStartSession}
-              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 font-bold rounded-2xl shadow-lg shadow-indigo-500/25 transition-all transform active:scale-95"
+                className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[var(--pb-ink)] bg-[var(--pb-coral)] py-4 font-black uppercase tracking-wide shadow-[5px_5px_0_var(--pb-ink)] transition-transform hover:-translate-y-1 active:translate-x-1 active:translate-y-1 active:shadow-none"
             >
-              Mulai Kamera
+                Mulai Kamera <Camera className="h-5 w-5" />
             </button>
           </div>
         )}
@@ -202,8 +208,8 @@ export default function PhotoboxApp() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-8 text-xs text-slate-500 text-center">
-        Built with Next.js, React Konva, and Google MediaPipe Tasks Vision.
+      <footer className="mt-8 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--pb-ink)]/60 text-center">
+        Make a moment worth keeping
       </footer>
     </main>
   );

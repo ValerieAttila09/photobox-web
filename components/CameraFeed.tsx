@@ -25,7 +25,7 @@ export function CameraFeed({
   isFlashing,
 }: CameraFeedProps) {
   return (
-    <div className="relative w-full max-w-3xl aspect-video bg-gray-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-800">
+    <div className="photobox-panel relative w-full max-w-3xl aspect-video bg-black overflow-hidden">
       {/* Stream Video Webcam */}
       <video
         ref={videoRef}
@@ -42,8 +42,8 @@ export function CameraFeed({
       {/* Indicator Status Loading MediaPipe / Kamera */}
       {(!isReady || (!cameraActive && !error)) && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gray-950/80 text-white gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-indigo-500" />
-          <p className="text-sm font-medium text-gray-300">
+          <Loader2 className="w-10 h-10 animate-spin text-[var(--pb-pink)]" />
+          <p className="text-sm font-bold text-gray-300">
             {!isReady ? 'Memuat Model AI MediaPipe...' : 'Membuka Akses Kamera...'}
           </p>
         </div>
