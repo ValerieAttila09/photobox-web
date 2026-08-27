@@ -9,7 +9,7 @@ interface CameraFeedProps {
   cameraActive: boolean;
   error: string | null;
   isTriggered: boolean;
-  photoCount: number;
+  captureNumber: number;
   maxPhotos?: number;
   isFlashing: boolean;
 }
@@ -20,12 +20,12 @@ export function CameraFeed({
   cameraActive,
   error,
   isTriggered,
-  photoCount,
+  captureNumber,
   maxPhotos = 3,
   isFlashing,
 }: CameraFeedProps) {
   return (
-    <div className="relative w-full max-w-3xl aspect-video bg-gray-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-800">
+    <div className="photobox-panel relative w-full max-w-lg aspect-[3/4] bg-black overflow-hidden">
       {/* Stream Video Webcam */}
       <video
         ref={videoRef}
@@ -42,8 +42,8 @@ export function CameraFeed({
       {/* Indicator Status Loading MediaPipe / Kamera */}
       {(!isReady || (!cameraActive && !error)) && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gray-950/80 text-white gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-indigo-500" />
-          <p className="text-sm font-medium text-gray-300">
+          <Loader2 className="w-10 h-10 animate-spin text-[var(--pb-pink)]" />
+          <p className="text-sm font-bold text-gray-300">
             {!isReady ? 'Memuat Model AI MediaPipe...' : 'Membuka Akses Kamera...'}
           </p>
         </div>
@@ -76,9 +76,7 @@ export function CameraFeed({
           {/* Counter Hasil Potret */}
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/20 rounded-full text-white text-xs font-bold">
             <Camera className="w-3.5 h-3.5 text-indigo-400" />
-            <span>
-              {photoCount} / {maxPhotos} Foto
-            </span>
+            <span>{captureNumber} / {maxPhotos} Foto</span>
           </div>
         </div>
       )}
