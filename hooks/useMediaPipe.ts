@@ -3,12 +3,14 @@ import { GestureRecognizer, FilesetResolver } from '@mediapipe/tasks-vision';
 
 interface UseMediaPipeProps {
   active: boolean;
+  detectGestures?: boolean;
   onGestureDetected: (gestureName: string) => void;
   minConfidence?: number;
 }
 
 export function useMediaPipe({
   active,
+  detectGestures = true,
   onGestureDetected,
   minConfidence = 0.75,
 }: UseMediaPipeProps) {
@@ -125,6 +127,7 @@ export function useMediaPipe({
 
     if (
       active &&
+      detectGestures &&
       recognizer &&
       video &&
       video.readyState >= 2 &&
@@ -147,10 +150,10 @@ export function useMediaPipe({
       }
     }
 
-    if (active) {
+    if (active && detectGestures) {
       requestRef.current = requestAnimationFrame(() => predictWebcamRef.current());
     }
-  }, [active, minConfidence, onGestureDetected]);
+  }, [active, detectGestures, minConfidence, onGestureDetected]);
 
   useEffect(() => {
     predictWebcamRef.current = predictWebcam;
@@ -158,7 +161,7 @@ export function useMediaPipe({
 
   // Loop RAF Trigger
   useEffect(() => {
-    if (active && cameraActive && isReady) {
+    if (active && detectGestures && cameraActive && isReady) {
       requestRef.current = requestAnimationFrame(predictWebcam);
     } else if (requestRef.current) {
       cancelAnimationFrame(requestRef.current);
@@ -169,7 +172,7 @@ export function useMediaPipe({
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [active, cameraActive, isReady, predictWebcam]);
+  }, [active, detectGestures, cameraActive, isReady, predictWebcam]);
 
   return {
     videoRef,

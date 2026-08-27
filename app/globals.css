@@ -139,6 +139,17 @@
 }
 
 @layer components {
+  .countdown-overlay {
+    contain: strict;
+    will-change: opacity;
+  }
+
+  .countdown-number {
+    animation: countdown-pop 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    contain: layout paint;
+    will-change: transform, opacity;
+  }
+
   .photobox-shell {
     background-color: var(--pb-lilac);
     background-image:
@@ -162,5 +173,24 @@
       var(--pb-ink) 42px 58px,
       #6257d9 58px 76px
     );
+  }
+}
+
+@keyframes countdown-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  18% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  78% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
   }
 }

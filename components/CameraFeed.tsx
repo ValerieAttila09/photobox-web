@@ -25,7 +25,7 @@ export function CameraFeed({
   isFlashing,
 }: CameraFeedProps) {
   return (
-    <div className="photobox-panel relative w-full max-w-3xl aspect-video bg-black overflow-hidden">
+    <div className="photobox-panel relative w-full max-w-lg aspect-[3/4] bg-black overflow-hidden">
       {/* Stream Video Webcam */}
       <video
         ref={videoRef}

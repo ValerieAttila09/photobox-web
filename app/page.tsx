@@ -48,8 +48,6 @@ export default function PhotoboxApp() {
         isProcessingGesture.current = true;
         setStage('COUNTDOWN');
         setCountdown(3);
-
-        setCountdown(3);
       }
     },
     [stage]
@@ -58,6 +56,7 @@ export default function PhotoboxApp() {
   // Inisialisasi Hook MediaPipe
   const { videoRef, isReady, cameraActive, error, stopCamera } = useMediaPipe({
     active: stage === 'SCANNING' || stage === 'COUNTDOWN',
+    detectGestures: stage === 'SCANNING',
     onGestureDetected: handleGestureDetected,
   });
 
@@ -164,7 +163,7 @@ export default function PhotoboxApp() {
           </div>
         </div>
         <div className="hidden items-center gap-2 rounded-full border-2 border-(--pb-ink) bg-white px-4 py-2 text-xs font-black uppercase sm:flex">
-          <Sparkles className="h-3.5 w-3.5 text-(--pb-coral)" /> AI photo booth
+          <Sparkles className="h-3.5 w-3.5 text-(--pb-coral)" /> Photo booth by <i className="text-[#6257d9]">Valerie</i>
         </div>
       </header>
 
@@ -178,7 +177,7 @@ export default function PhotoboxApp() {
             </div>
             <div className="space-y-2">
                 <p className="text-xs font-black uppercase tracking-[0.24em] text-(--pb-pink)">Welcome to the studio</p>
-                <h1 className="text-4xl font-black tracking-tight md:text-6xl">SnapBox <span className="text-[#6257d9]">AI</span></h1>
+                <h1 className="text-4xl font-black tracking-tight md:text-6xl">Snap<span className="text-[#6257d9]">Box</span></h1>
                 <p className="text-sm font-medium text-gray-600">
                   Tunjukkan gestur <span className="font-black text-(--pb-coral)">Thumbs Up</span> untuk memotret otomatis.
               </p>
@@ -225,8 +224,8 @@ export default function PhotoboxApp() {
                 maxPhotos={photoCount}
                 isFlashing={isFlashing}
               />
-              <CountdownOverlay count={countdown} />
             </div>
+            <CountdownOverlay count={countdown} />
           </div>
         )}
 
