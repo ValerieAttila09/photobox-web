@@ -9,7 +9,7 @@ interface CameraFeedProps {
   cameraActive: boolean;
   error: string | null;
   isTriggered: boolean;
-  photoCount: number;
+  captureNumber: number;
   maxPhotos?: number;
   isFlashing: boolean;
 }
@@ -20,7 +20,7 @@ export function CameraFeed({
   cameraActive,
   error,
   isTriggered,
-  photoCount,
+  captureNumber,
   maxPhotos = 3,
   isFlashing,
 }: CameraFeedProps) {
@@ -76,9 +76,7 @@ export function CameraFeed({
           {/* Counter Hasil Potret */}
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/20 rounded-full text-white text-xs font-bold">
             <Camera className="w-3.5 h-3.5 text-indigo-400" />
-            <span>
-              {photoCount} / {maxPhotos} Foto
-            </span>
+            <span>{captureNumber} / {maxPhotos} Foto</span>
           </div>
         </div>
       )}

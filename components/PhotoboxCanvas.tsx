@@ -41,12 +41,13 @@ export function PhotoboxCanvas({ photos, theme, filter, stickers, onAddSticker, 
 
   // Dimensions Canvas Photobox Strip
   const canvasWidth = 360;
-  const canvasHeight = 1200;
   const photoWidth = 240;
   const photoHeight = 320; // Ratio 3:4
   const paddingX = (canvasWidth - photoWidth) / 2; // 30px
   const startY = 40;
   const gapY = 25;
+  const footerHeight = 120;
+  const canvasHeight = startY + photos.length * (photoHeight + gapY) + footerHeight;
 
   // Load HTML Image Elements dari Base64
   useEffect(() => {

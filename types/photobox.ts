@@ -4,6 +4,8 @@ export type PhotoFilter = 'none' | 'grayscale' | 'sepia' | 'vintage' | 'warm' | 
 
 export type FrameTheme = 'classic-white' | 'dark-mode' | 'pastel-pink' | 'retro-yellow' | 'cyber-blue';
 
+export type PhotoCount = 2 | 3 | 4;
+
 export interface PhotoboxSticker {
   id: string;
   emoji: string;
